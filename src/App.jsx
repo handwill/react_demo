@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import Header from "./componets/Header";
 import List from "./componets/List";
+import Footer from "./componets/Footer";
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
       todos: [
-        { id: 1, name: "hhh" },
-        { id: 2, name: "jdfkas" },
+        { id: 1, name: "hhh", isComplete: true },
+        { id: 2, name: "jdfkas", isComplete: false },
       ],
     };
   }
@@ -22,6 +23,7 @@ export default class App extends Component {
       <div>
         <Header addTodo={this.addTodo}></Header>
         <List todos={todos} />
+        <Footer todos={todos} />
       </div>
     );
   }

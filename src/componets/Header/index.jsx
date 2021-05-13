@@ -9,6 +9,7 @@ export default class Header extends React.Component {
     this.props.addTodo({
       id: +new Date(),
       name: target.value,
+      isComplete: false,
     });
   };
   render() {
