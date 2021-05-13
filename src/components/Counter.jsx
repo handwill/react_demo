@@ -5,8 +5,14 @@ class Counter extends Component {
   constructor(props) {
     super(props);
   }
-  increment = () => {};
-  decrement = () => {};
+  increment = () => {
+    // this.props.dispatch({ type: "INCREMENT" });
+    this.props.increment();
+  };
+  decrement = () => {
+    // this.props.dispatch({ type: "DECREMENT" });
+    this.props.decrement();
+  };
   render() {
     const { count } = this.props;
     return (
@@ -25,4 +31,13 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Counter);
+const mapDispatchToProps = {
+  increment: () => {
+    return { type: "INCREMENT" };
+  },
+  decrement: () => {
+    return { type: "DECREMENT" };
+  },
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
