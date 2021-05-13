@@ -1,14 +1,23 @@
 import React from "react";
 import "./index.scss";
+import PropTypes from "prop-types";
 
 export default class Header extends React.Component {
-  //   constructor(props) {
-  //     super(props);
-  //   }
+  // constructor(props) {
+  //   super(props);
+  // }
+  static propTypes = {
+    todos: PropTypes.array.isRequired,
+    test: PropTypes.array.isRequired,
+  };
+  static defaultProps = {
+    todos: [],
+  };
   onChange = (event) => {
     debugger;
     console.log(this.check.value);
   };
+
   render() {
     const { todos } = this.props;
     return (

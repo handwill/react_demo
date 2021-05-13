@@ -1,30 +1,52 @@
 import React, { Component } from "react";
-import Header from "./componets/Header";
-import List from "./componets/List";
-import Footer from "./componets/Footer";
-export default class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      todos: [
-        { id: 1, name: "hhh", isComplete: true },
-        { id: 2, name: "jdfkas", isComplete: false },
-      ],
-    };
+import Counter from "./components/Counter";
+import { Provider } from "react-redux";
+
+import { createStore } from "redux";
+
+const initialState = {
+  count: 0,
+};
+
+function reducer(state = initialState, action) {
+  console.log("reducer", state, action);
+
+  switch (action.type) {
+    case "INCREMENT":
+      return {
+        count: state.count + 1,
+      };
+    case "DECREMENT":
+      return {
+        count: state.count - 1,
+      };
+    case "RESET":
+      return {
+        count: 0,
+      };
+    default:
+      return state;
   }
-  addTodo = (todo) => {
-    this.setState({
-      todos: this.state.todos.concat(todo),
-    });
-  };
+}
+
+const store = createStore(reducer);
+
+store.dispatch({ type: "INCREMENT" });
+store.dispatch({ type: "INCREMENT" });
+store.dispatch({ type: "INCREMENT" });
+
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    const { todos } = this.state;
     return (
-      <div>
-        <Header addTodo={this.addTodo}></Header>
-        <List todos={todos} />
-        <Footer todos={todos} />
-      </div>
+      <Provider store={store}>
+        <div>
+          <Counter></Counter>
+        </div>
+      </Provider>
     );
   }
 }
